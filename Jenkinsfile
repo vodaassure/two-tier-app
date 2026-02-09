@@ -13,7 +13,7 @@ pipeline {
 
         stage("Build") {
             steps {
-                sh " docker build -t two-tier-flask-app ."
+                sh "docker build -t two-tier-flask-app ."
                 echo "building is done"
             }
         }
@@ -32,8 +32,8 @@ pipeline {
                 )]){
 
                 sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPass}"
-                sh " docker tag two-tier-flask-app ${env.dockerhubUser}/two-tier-flask-app"
-                sh " docker push ${env.dockerhubUser}/two-tier-flask-app:latest"
+                sh "docker tag two-tier-flask-app ${env.dockerhubUser}/two-tier-flask-app:latest"
+                sh "docker push ${env.dockerhubUser}/two-tier-flask-app:latest"
 
                 }
 
