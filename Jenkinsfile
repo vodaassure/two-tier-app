@@ -9,6 +9,18 @@ pipeline {
                 echo "code clone done"
             }
         }
+        stage("prepare docker ignore"){
+            steps{
+                sh '''
+                  echo "mysql-data/" > .dockerignore
+                  echo "*.pem" >>  .dockerignore
+                  echo "*.cnf" >>  .dockerignore
+                  echo "*.key" >>  .dockerignore
+                  echo "Docker ignore file created automatically"
+
+                '''
+            }
+        }
 
         stage("Build") {
             steps {
