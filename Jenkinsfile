@@ -7,7 +7,6 @@ pipeline {
             steps {
                 git branch: "main", url: "https://github.com/vodaassure/two-tier-app.git"
                 echo "code clone done"
-            
             }
         }
 
@@ -27,16 +26,14 @@ pipeline {
         stage("push to docker hub"){
             steps {
                 withCredentials([usernamePassword(credentialsId:"dockerhub",
-                passwordVariable: "dockerhubPass",
-                usernameVariable: "dockerhubUser"
+                    passwordVariable: "dockerhubPass",
+                    usernameVariable: "dockerhubUser"
                 )]){
 
-                sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPass}"
-                sh "docker tag two-tier-flask-app ${env.dockerhubUser}/two-tier-flask-app:latest"
-                sh "docker push ${env.dockerhubUser}/two-tier-flask-app:latest"
-
+                    sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPass}"
+                    sh "docker tag two-tier-flask-app ${env.dockerhubUser}/two-tier-flask-app:latest"
+                    sh "docker push ${env.dockerhubUser}/two-tier-flask-app:latest"
                 }
-
             }
         }
 
@@ -48,3 +45,4 @@ pipeline {
         }
 
     }
+}
