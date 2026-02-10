@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'dev' }
 
     stages {
 
@@ -14,6 +14,12 @@ pipeline {
             steps {
                 sh "docker build -t two-tier-flask-app ."
                 echo "building is done"
+            }
+        }
+        stage("trivy test"){
+            step{
+                sh "trivy fs . -o results.json "
+                echo " build scan is done by trivy"
             }
         }
 
