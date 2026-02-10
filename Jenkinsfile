@@ -17,7 +17,7 @@ pipeline {
             }
         }
         stage("trivy test"){
-            step{
+            steps{
                 sh "trivy fs . -o results.json "
                 echo " build scan is done by trivy"
             }
